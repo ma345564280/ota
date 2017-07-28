@@ -1,0 +1,243 @@
+<!DOCTYPE html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Advertisement</title>
+
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/base.css" rel="stylesheet">
+  <link href="css/layer.css" rel="stylesheet">
+  <link href="css/font-awesome.css" rel="stylesheet">
+  <link href="css/advertisement.css" rel="stylesheet">
+  <link href="css/bootstrap-table.css" rel="stylesheet">
+  <link href="css/font-awesome.css" rel="stylesheet">
+  <link href="css/bootstrap-select.css" rel="stylesheet">
+</head>
+<body>
+	<div class="container">
+		<div id="header"></div>
+    <div class="row" id="content">
+      <div class="col-md-2">
+        <nav id="sidebar" class="">
+          <!--Loading sidebar-->
+        </nav>
+      </div>
+      <div class="col-md-10">
+      <!--筛选器-->
+	      <div>
+	          <select id="selectCustomer" class="selectpicker">
+	              <option>All Customer</option>
+	          </select>
+	          <button class="btn btn-default" id="confirm_selectWithFilter">GO</button>
+	      </div>
+	      <br/>
+	      <button id="addAdvertisement" class="btn btn-success" type="button"><span
+	                            class="glyphicon glyphicon-plus"></span>Add</button>
+	      <button id="deleteAd" class="btn btn-danger" type="button"><span class="glyphicon glyphicon-trash"></span>Delete</button>
+	      <button id="detailAd" class="btn btn-info" type="button"><span class="glyphicon glyphicon-th"></span>Detail</button>
+        <table id="advertisement_table" class="table">
+	        <thead>
+	        	<tr>
+	        		<th data-checkbox="true"></th>
+		        	<th data-field="download" data-formatter="downloadFormatter">Advertisement</th>
+		        	<th data-field="name">Customer</th>
+		            <th data-field="groupname">Group</th>
+		            <th data-field="adversion">Version</th>
+		            <th data-field="updateTime" data-formatter="timeFormatter">Create Time</th>
+		            <!--  <th data-field="enforce" data-formatter="enforceFormatter">Enforce</th>
+		            <th data-field="status" data-formatter="statusFormatter">Status</th>
+		            <th data-formatter="OperationFun" data-events="operateEvents">Operation</th>
+		            -->
+	          	</tr>
+	       	</thead>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div id="footer">
+    Copyright © 2008-2016 All Rights Reserved.
+  </div>
+  <div class="modal" id="addFilterModal" tabindex="-1" role="dialog" aria-labelledby="addFilterTitle">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="addFilterTitle">Add filter</h4>
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal">
+            <div class="filterForm">
+              <div class="form-group">
+                <label for="romVersion" class="col-sm-2 control-label">Rom Version</label>
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <input type="text" class="form-control" id="romVersion" placeholder="Rom Version">
+                    <span class="red-star input-group-addon">*</span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="type" class="col-sm-2 control-label">Type</label>
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <input type="text" class="form-control" id="type" placeholder="Type">
+                    <span class="red-star input-group-addon">*</span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <div class="checkbox">
+                    <label>
+                      <input id="appVersionCheck" type="checkbox" value="appVersionDiv">App Version
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div id="appVersionDiv" class="form-group displayNone">
+                <label for="appVersion" class="col-sm-2 control-label">App Version</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="appVersion" placeholder="App Version">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <div class="checkbox">
+                    <label>
+                      <input id="hardwareVersionCheck" type="checkbox" value="hardwareVersionDiv">Hardware Version
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div id="hardwareVersionDiv" class="form-group displayNone">
+                <label for="hardwareVersion" class="col-sm-2 control-label">Hardware Version</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="hardwareVersion" placeholder="Hardware Version">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <div class="checkbox">
+                    <label>
+                      <input id="manufacturerCheck" type="checkbox" value="manufacturerDiv">Manufacturer
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div id="manufacturerDiv" class="form-group displayNone">
+                <label for="manufacturer" class="col-sm-2 control-label">Manufacturer</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="manufacturer" placeholder="Manufacturer">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <div class="checkbox">
+                    <label>
+                      <input id="DVBSupportCheck" type="checkbox" value="DVBSupportDiv">DVBSupport
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div id="DVBSupportDiv" class="form-group displayNone">
+                <label for="DVBSupport" class="col-sm-2 control-label">DVBSupport</label>
+                <div class="col-sm-10">
+                  <label class="radio-inline">
+                    <input type="radio" name="DVBSupport" id="yesSupport" value="1"> Yes
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" name="DVBSupport" id="noSupport" value="0"> No
+                  </label>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <div class="checkbox">
+                    <label>
+                      <input id="homeUICheck" type="checkbox" value="homeUIDiv">Home UI
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div id="homeUIDiv" class="form-group displayNone">
+                <label for="homeUI" class="col-sm-2 control-label">Home UI</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="homeUI" placeholder="Home UI">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <div class="checkbox">
+                    <label>
+                      <input id="userIDCheck" type="checkbox" value="userIDDiv">User ID
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div id="userIDDiv" class="form-group displayNone">
+                <label for="userID" class="col-sm-2 control-label">User ID</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="userID" placeholder="User ID">
+                </div>
+              </div>
+              <!-- <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <div class="checkbox">
+                    <label>
+                      <input id="customNameCheck" type="checkbox" value="customNameDiv">Custom Name
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div id="customNameDiv" class="form-group displayNone">
+                <label for="customName" class="col-sm-2 control-label">Custom Name</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="customName" placeholder="Custom Name">
+                </div>
+              </div> -->
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <div class="checkbox">
+                    <label>
+                      <input id="IPAddressCheck" type="checkbox" value="IPAddressDiv">IP Address
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div id="IPAddressDiv" class="displayNone">
+                <div class="form-group">
+                  <label for="IPAddressBegin" class="col-sm-2 control-label">IP Address Begin</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="IPAddressBegin" placeholder="IP Address Begin">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="IPAddressEnd" class="col-sm-2 control-label">IP Address End</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="IPAddressEnd" placeholder="IP Address End">
+                  </div>
+                </div>
+              </div>
+              <input type="hidden" name="adid" id="adid" value="">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="bulk-addFilterBtn">Add</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="close">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+	<script src="js/jquery-1.11.1.min.js" type="text/javascript"></script>
+	<script src="js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="js/common.js" type="text/javascript"></script>
+	<script src="js/advertisement.js" type="text/javascript"></script>
+	  	<script src="js/layer.js" type="text/javascript"></script>
+	<script src="js/bootstrap-table.js" type="text/javascript"></script>
+	<script src="js/bootstrap-select.js" type="text/javascript"></script>
+	<script src="js/bootstrap-table-export.js" type="text/javascript"></script>
+</body>
+</html>
+

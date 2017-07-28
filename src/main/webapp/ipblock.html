@@ -1,0 +1,147 @@
+<!DOCTYPE html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Group Management</title>
+
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/base.css" rel="stylesheet">
+  <link href="css/layer.css" rel="stylesheet">
+  <link href="css/font-awesome.css" rel="stylesheet">
+  <link href="css/bootstrap-table.css" rel="stylesheet">
+  <link href="css/bootstrap-select.css" rel="stylesheet">
+</head>
+<body>
+	<div class="container">
+		<div id="header"></div>
+    <div class="row" id="content">
+      <div class="col-md-2">
+        <nav id="sidebar_service" class="">
+          <!--Loading sidebar-->
+        </nav>
+      </div>
+      <div class="col-md-10">
+     	<button id="add" class="btn btn-success" type="button" data-toggle="modal" data-target="#addIPBlockModal">
+        <span class="glyphicon glyphicon-plus"></span>Add</button>
+        <table id="ipblock_table" class="table">
+        	<thead>
+	        	<tr>
+		        	<th data-field="ipbegin">Begin IP</th>
+		            <th data-field="ipend">End IP</th>
+		            <th data-formatter="ipblockStatusReform" data-field="status">Status</th>
+		            <th data-formatter="OperationFun" data-events="actionEvents">Operations</th>
+	          	</tr>
+        	</thead>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div id="footer">
+    Copyright © 2008-2016 All Rights Reserved.
+  </div>
+  <!-- addModelModal -->
+  <div class="modal modelModal" id="addIPBlockModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close closeBtn" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Add IPBlock</h4>
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal">
+            <div class="form-group">
+              <label for="addIPBlock_ipbegin" class="col-sm-2 control-label">IPBegin:</label>
+              <div class="col-sm-10">
+              	<input type="text" class="form-control" id="addIPBlock_ipbegin" placeholder="Begin IP">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="addIPBlock_ipend" class="col-sm-2 control-label">IP End:</label>
+              <div class="col-sm-10">
+                  	<input type="text" class="form-control" id="addIPBlock_ipend" placeholder="End IP">
+              </div>
+            </div>
+            
+            
+            <div class="form-group">
+              <label for="addIPBlock_status" class="col-sm-2 control-label">Status: </label>
+              <div class="col-sm-10">
+                  	<select id="addIPBlock_status" class="selectpicker form-control">
+                  	<option value="Open">Open</option>
+                  	<option value="Close">Close</option>
+                  	</select>
+              </div>
+            </div>
+            
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="submit_addIPBlock" onclick="submit_addIPBlockClick()">Submit</button>
+          <button type="button" class="btn btn-default closeBtn" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End addProductModal -->
+  <!-- editProductModal -->
+  <div class="modal" id="editIPBlockModal" tabindex="-1" role="dialog" aria-labelledby="editIPBlockTitle">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close closeBtn" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="editProductTitle">Edit IPBlock</h4>
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal">
+          <div class="form-group">
+              <label for="editIPBlock_ipbegin" class="col-sm-2 control-label">Begin IP:</label>
+              <div class="col-sm-10">
+                  <input type="text" class="form-control" id="editIPBlock_ipbegin" placeholder="Model">
+                  <span class="red-star input-group-addon"></span>
+                  <input type="text" class="form-control" style="display:none" id="editIPBlock_id">
+              </div>
+            </div>
+          
+          
+            <div class="form-group">
+              <label for="editIPBlock_ipend" class="col-sm-2 control-label">End IP:</label>
+              <div class="col-sm-10">
+                  <input type="text" class="form-control" id="editIPBlock_ipend" placeholder="End IP">
+                  <span class="red-star input-group-addon"></span>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="editIPBlock_status" class="col-sm-2 control-label">Status:</label>
+              <div class="col-sm-10">
+                  	<select id="editIPBlock_status"  class="selectpicker">
+                  	<option value="Open">Open</option>
+                  	<option value="Close">Close</option>
+                  	</select>
+              </div>
+            </div>
+            
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="editIPBlock_Submit">Submit</button>
+          <button type="button" class="btn btn-default closeBtn" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End editGroupModal -->
+	<script src="js/jquery-1.11.1.min.js" type="text/javascript"></script>
+	<script src="js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="js/bootstrap-table.js" type="text/javascript"></script>
+	<script src="js/bootstrap-select.js" type="text/javascript"></script>
+	<script src="js/bootstrap-table-export.js" type="text/javascript"></script>
+	<script src="js/layer.js" type="text/javascript"></script>
+  	<script src="js/common_service.js" type="text/javascript"></script>
+	<script src="js/ipblock.js" type="text/javascript"></script>
+	<script src="js/ipcheck.js" type="text/javascript"></script>
+</body>
+</html>
+

@@ -1,0 +1,167 @@
+<!DOCTYPE html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>User Managerment</title>
+
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/base.css" rel="stylesheet">
+  <link href="css/layer.css" rel="stylesheet">
+  <link href="css/bootstrap-select.css" rel="stylesheet">
+  <link href="css/bootstrap-table.css" rel="stylesheet">
+  <link href="css/font-awesome.css" rel="stylesheet">
+  <link href="css/usermanagerment.css" rel="stylesheet">
+</head>
+<body>
+	<div class="container">
+		<div id="header"></div>
+    <div class="row" id="content">
+      <div class="col-md-2">
+        <nav id="sidebar_setting" class="">
+          <!--Loading sidebar-->
+        </nav>
+      </div>
+      <div class="col-md-10">
+      <button id="add" class="btn btn-success" type="button" data-toggle="modal" data-target="#addAccountModal">
+      <span class="glyphicon glyphicon-plus"></span>Add</button>
+        <table id="user_table">
+        <thead>
+          <tr>
+            <th data-field="username">Account</th>
+            <th data-field="password">Password</th>
+            <th data-field="role">Role</th>
+            <th data-formatter="accountOperationFun" data-events="actionEvents">Operation</th>
+          </tr>
+          </thead>
+        </table>
+        
+      </div>
+    </div>
+  </div>
+  <div id="footer">
+    Copyright © 2008-2016 All Rights Reserved.
+  </div>
+  <!-- addAccountModal -->
+  <div class="modal accountModal" id="addAccountModal" tabindex="-1" role="dialog" aria-labelledby="addAccount">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close closeBtn" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="addAccount">Add account</h4>
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal">
+            <div class="form-group">
+              <label for="account" class="col-sm-2 control-label">Account</label>
+              <div class="col-sm-10">
+                <div class="input-group">
+                  <input type="text" class="form-control" id="account" placeholder="Account">
+                  <span class="red-star input-group-addon">*</span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="password" class="col-sm-2 control-label">Password</label>
+              <div class="col-sm-10">
+                <div class="input-group">
+                  <input type="password" class="form-control" id="password" placeholder="Password">
+                  <span class="red-star input-group-addon">*</span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="againPassword" class="col-sm-2 control-label">Confirm password</label>
+              <div class="col-sm-10">
+                <div class="input-group">
+                  <input type="password" class="form-control" id="againPassword" placeholder="Enter password again">
+                  <span class="red-star input-group-addon">*</span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="authority" class="col-sm-2 control-label">Role</label>
+              <div class="col-sm-10">
+                <div class="input-group">
+                  <select class="form-control selectpicker" id="addselectRole">
+                  </select>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="submit">Submit</button>
+          <button type="button" class="btn btn-default closeBtn" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End addAccountModal -->
+  <!-- editAccountModal -->
+  <div class="modal accountModal" id="editAccountModal" tabindex="-1" role="dialog" aria-labelledby="editAccountTitle">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close closeBtn" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="editAccountTitle">Edit account</h4>
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal">
+            <div class="form-group">
+              <label for="account" class="col-sm-2 control-label">Account</label>
+              <div class="col-sm-10">
+                <div class="input-group">
+                  <input type="text" class="form-control" id="editAccount" placeholder="Account" disabled="">
+                  <span class="red-star input-group-addon"></span>
+                  <input type="hidden" name="userid" id="userid">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="password" class="col-sm-2 control-label">Password</label>
+              <div class="col-sm-10">
+                <div class="input-group">
+                  <input type="password" class="form-control" id="editPassword" placeholder="Password">
+                  <span class="red-star input-group-addon">*</span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="againPassword" class="col-sm-2 control-label">Confirm password</label>
+              <div class="col-sm-10">
+                <div class="input-group">
+                  <input type="password" class="form-control" id="editAgainPassword" placeholder="Enter password again">
+                  <span class="red-star input-group-addon">*</span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="authority" class="col-sm-2 control-label">Role</label>
+              <div class="col-sm-10">
+                <div class="input-group">
+                  <select class="form-control selectpicker" id="editselectRole">
+                  </select>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="editSubmit">Submit</button>
+          <button type="button" class="btn btn-default closeBtn" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End addAccountModal -->
+	<script src="js/jquery-1.11.1.min.js" type="text/javascript"></script>
+	<script src="js/bootstrap.min.js" type="text/javascript"></script>
+ 	<script src="js/common_setting.js" type="text/javascript"></script>
+ 	<script src="js/layer.js" type="text/javascript"></script>
+ 	<script src="js/bootstrap-table.js" type="text/javascript"></script>
+ 	<script src="js/bootstrap-select.js" type="text/javascript"></script>
+	<script src="js/usermanagerment.js" type="text/javascript"></script>
+</body>
+</html>
+

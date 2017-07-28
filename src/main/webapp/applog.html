@@ -1,0 +1,80 @@
+<!DOCTYPE html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>App Log</title>
+
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/base.css" rel="stylesheet">
+  <link href="css/font-awesome.css" rel="stylesheet">
+  <link href="css/layer.css" rel="stylesheet">
+  <link href="css/bootstrap-table.css" rel="stylesheet">
+  <link href="css/bootstrap-select.css" rel="stylesheet">
+</head>
+<body>
+	<div class="container">
+		<div id="header"></div>
+    <div class="row" id="content">
+      <div class="col-md-2">
+        <nav id="sidebar" class="">
+          <!--Loading sidebar-->
+        </nav>
+      </div>
+      <div class="col-md-10">
+      	<div style="padding:0% 0% 0% 1%">
+
+                <select id="selectCustomer" class="selectpicker">
+                    <option>All Customer</option>
+                </select>
+
+                <select id="selectModel" class="selectpicker">
+                    <option>All Model</option>
+                </select>
+
+                <select id="selectAction" class="selectpicker">
+                    <option>All Action</option>
+                    <option>Downloading</option>
+                    <option>Install Success</option>
+                    <option>Download Success</option>
+                    <option>Download Fail</option>
+                    <option>Install Fail</option>
+                </select>
+                <button class="btn btn-default" id="confirm_selectAppLogWithFilter">GO</button>
+
+            </div>
+            <br/>
+        <table id="applog_table">
+        <thead>
+          <tr>
+            <th data-field="model">Model</th>
+            <th data-field="device">Device</th> 
+            <th data-field="appname">App Name</th>
+            <th data-field="packagename">Package Name</th>
+            <th data-field="version">Version</th>
+            <th data-field="ip">IP</th>
+            <th data-field="action" data-formatter="actionReFormFun">Action</th>
+            <th data-field="logtime">Created At</th>
+          </tr>
+          </thead>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div id="footer">
+    Copyright © 2008-2016 All Rights Reserved.
+  </div>
+  
+  <!-- End addAccountModal -->
+	<script src="js/jquery-3.2.1.js" type="text/javascript"></script>
+	<script src="js/bootstrap.min.js" type="text/javascript"></script>
+  	<script src="js/common.js" type="text/javascript"></script>
+	<script src="js/applog.js" type="text/javascript"></script>	
+	<script src="js/bootstrap-table.js" type="text/javascript"></script>
+	<script src="js/bootstrap-select.js" type="text/javascript"></script>
+	<script src="js/bootstrap-table-export.js" type="text/javascript"></script>
+	<script src="js/tableExport.js" type="text/javascript"></script>
+	<script src="js/jquery.base64.js" type="text/javascript"></script>
+</body>
+</html>
+

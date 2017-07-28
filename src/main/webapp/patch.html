@@ -1,0 +1,78 @@
+<!DOCTYPE html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>PATCH</title>
+
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/base.css" rel="stylesheet">
+  <link href="css/layer.css" rel="stylesheet">
+  <link href="css/font-awesome.css" rel="stylesheet">
+  <link href="css/patch.css" rel="stylesheet">
+  <link href="css/bootstrap-table.css" rel="stylesheet">
+  <link href="css/bootstrap-select.css" rel="stylesheet">
+</head>
+<body>
+	<div class="container">
+		<div id="header"></div>
+    <div class="row" id="content">
+      <div class="col-md-2">
+        <nav id="sidebar" class="">
+          <!--Loading sidebar-->
+        </nav>
+      </div>
+      <div class="col-md-10">
+      <!--筛选器-->
+	      <div>
+	          <select id="selectCustomer" class="selectpicker">
+	              <option>All Customer</option>
+	          </select>
+	          <select id="selectModel" class="selectpicker">
+	              <option>All Model</option>
+	          </select>
+	          <button class="btn btn-default" id="confirm_selectWithFilter">GO</button>
+	      </div>
+      <br/>
+      <button id="addPatch" class="btn btn-success" type="button"><span class="glyphicon glyphicon-plus"></span>Add</button>
+      <!--  
+      <button id="editPatch" class="btn btn-info" type="button"><span class="glyphicon glyphicon-edit"></span>Edit</button>
+      -->
+      <button id="deletePatch" class="btn btn-danger" type="button"><span class="glyphicon glyphicon-trash"></span>Delete</button>
+      <button id="detailPatch" class="btn btn-info" type="button"><span class="glyphicon glyphicon-th"></span>Detail</button>
+      
+        <table id="patch_table" class="table">
+	        <thead>
+	        	<tr>
+	        		<th data-checkbox="true"></th>
+		        	<th data-field="download" data-formatter="downloadFormatter">Software</th>
+		        	<th data-field="name">Customer</th>
+		            <th data-field="groupname">Group</th>
+		            <th data-field="type">Model</th>
+		            <th data-field="fileVersion">Version</th>
+		            <th data-field="updateTime" data-formatter="timeFormatter">Create Time</th>
+		            <!--  <th data-field="enforce" data-formatter="enforceFormatter">Enforce</th>
+		            <th data-field="status" data-formatter="statusFormatter">Status</th>
+		            <th data-formatter="OperationFun" data-events="operateEvents">Operation</th>
+		            -->
+	          	</tr>
+	       	</thead>
+        </table>
+        
+      </div>
+    </div>
+  </div>
+  <div id="footer">
+    Copyright © 2008-2016 All Rights Reserved.
+  </div>
+	<script src="js/jquery-1.11.1.min.js" type="text/javascript"></script>
+	<script src="js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="js/patch.js" type="text/javascript"></script>
+  	<script src="js/layer.js" type="text/javascript"></script>
+	<script src="js/bootstrap-table.js" type="text/javascript"></script>
+	<script src="js/bootstrap-select.js" type="text/javascript"></script>
+	<script src="js/bootstrap-table-export.js" type="text/javascript"></script>
+  	<script src="js/common.js" type="text/javascript"></script>
+</body>
+</html>
+

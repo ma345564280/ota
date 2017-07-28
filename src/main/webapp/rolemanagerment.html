@@ -1,0 +1,184 @@
+<!DOCTYPE html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Role Managerment</title>
+
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/base.css" rel="stylesheet">
+  <link href="css/layer.css" rel="stylesheet">
+  <link href="css/bootstrap-select.css" rel="stylesheet">
+  <link href="css/bootstrap-table.css" rel="stylesheet">
+  <link href="css/font-awesome.css" rel="stylesheet">
+  <link href="css/rolemanagerment.css" rel="stylesheet">
+</head>
+<body>
+	<div class="container">
+		<div id="header"></div>
+    <div class="row" id="content">
+      <div class="col-md-2">
+        <nav id="sidebar_setting" class="">
+          <!--Loading sidebar-->
+        </nav>
+      </div>
+      <div class="col-md-10">
+      <button id="add" class="btn btn-success" type="button" data-toggle="modal" data-target="#addRoleModal">
+      <span class="glyphicon glyphicon-plus"></span>Add</button>
+        <table id="role_table">
+        <thead>
+          <tr>
+            <th data-field="role">Role</th>
+            <th data-field="authority1" data-formatter="Reform">Authority1</th>
+            <th data-field="authority2" data-formatter="Reform">Authority2</th>
+            <th data-field="authority3" data-formatter="Reform">Authority3</th>
+            <th data-formatter="OperationFun" data-events="actionEvents">Operation</th>
+          </tr>
+          </thead>
+        </table>
+        
+      </div>
+    </div>
+  </div>
+  
+  
+    <!-- addRoleModal -->
+  <div class="modal accountModal" id="addRoleModal" tabindex="-1" role="dialog" aria-labelledby="addRole">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close closeBtn" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="addAccount">Add account</h4>
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal">
+            <div class="form-group">
+              <label for="role" class="col-sm-2 control-label">Role</label>
+              <div class="col-sm-10">
+                <div class="input-group">
+                  <input type="text" class="form-control" id="role" placeholder="role">
+                  <span class="red-star input-group-addon">*</span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="authority1" class="col-sm-2 control-label">Authority1</label>
+                <div class="col-sm-10">
+                  <label class="radio-inline">
+                    <input type="radio" name="authority1" id="yesAuthority1" value="1"> Yes
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" name="authority1" id="noAuthority1" value="0" checked="true"> No
+                  </label>
+                </div>
+            </div>
+            <div class="form-group">
+               <label for="authority2" class="col-sm-2 control-label">Authority2</label>
+                <div class="col-sm-10">
+                  <label class="radio-inline">
+                    <input type="radio" name="authority2" id="yesAuthority2" value="1"> Yes
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" name="authority2" id="noAuthority2" value="0" checked="true"> No
+                  </label>
+                </div>
+            </div>
+            <div class="form-group">
+               <label for="authority3" class="col-sm-2 control-label">Authority3</label>
+                <div class="col-sm-10">
+                  <label class="radio-inline">
+                    <input type="radio" name="authority3" id="yesAuthority3" value="1"> Yes
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" name="authority3" id="noAuthority3" value="0" checked="true"> No
+                  </label>
+                </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="submit">Submit</button>
+          <button type="button" class="btn btn-default closeBtn" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End addRoleModal -->
+  <!-- editRoleModal -->
+  <div class="modal accountModal" id="editRoleModal" tabindex="-1" role="dialog" aria-labelledby="editRoleTitle">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close closeBtn" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="editRoleTitle">Edit Role</h4>
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal">
+            <div class="form-group">
+              <label for="role" class="col-sm-2 control-label">Role</label>
+              <div class="col-sm-10">
+                <div class="input-group">
+                  <input type="text" class="form-control" id="editRole" placeholder="Role">
+                  <span class="red-star input-group-addon"></span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="authority1" class="col-sm-2 control-label">Authority1</label>
+                <div class="col-sm-10">
+                  <label class="radio-inline">
+                    <input type="radio" name="editauthority1" id="yesEditAuthority1" value="1"> Yes
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" name="editauthority1" id="noEditAuthority1" value="0" checked="true"> No
+                  </label>
+                </div>
+            </div>
+            <div class="form-group">
+               <label for="authority2" class="col-sm-2 control-label">Authority2</label>
+                <div class="col-sm-10">
+                  <label class="radio-inline">
+                    <input type="radio" name="editauthority2" id="yesEditAuthority2" value="1"> Yes
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" name="editauthority2" id="noEditAuthority2" value="0" checked="true"> No
+                  </label>
+                </div>
+            </div>
+            <div class="form-group">
+               <label for="authority3" class="col-sm-2 control-label">Authority3</label>
+                <div class="col-sm-10">
+                  <label class="radio-inline">
+                    <input type="radio" name="editauthority3" id="yesEditAuthority3" value="1"> Yes
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" name="editauthority3" id="noEditAuthority3" value="0" checked="true"> No
+                  </label>
+                </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="editSubmit">Submit</button>
+          <button type="button" class="btn btn-default closeBtn" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End addRoleModal -->
+  
+  
+  
+  <div id="footer">
+    Copyright © 2008-2016 All Rights Reserved.
+  </div>
+	<script src="js/jquery-1.11.1.min.js" type="text/javascript"></script>
+	<script src="js/bootstrap.min.js" type="text/javascript"></script>
+ 	<script src="js/common_setting.js" type="text/javascript"></script>
+ 	<script src="js/layer.js" type="text/javascript"></script>
+ 	<script src="js/bootstrap-table.js" type="text/javascript"></script>
+ 	<script src="js/bootstrap-select.js" type="text/javascript"></script>
+	<script src="js/rolemanagerment.js" type="text/javascript"></script>
+</body>
+</html>
+

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<!-- namespace ：必须与对应的接口全类名一致 id:必须与对应的接口的某个对应方法名一致 -->
+<mapper namespace="com.ota.dao.UserMapper">
+	<select id="countUserInThisRole" parameterType="String" resultType="int">
+	    select count(*) from user where role=#{role,jdbcType=VARCHAR};
+	</select>
+
+	<insert id="save" parameterType="User">
+		insert into user
+		(username,password,role)
+		values(#{username},#{password},#{role})
+	</insert>
+
+	<!-- <update id="updateUser" parameterType="User"> update tusers set password=#{password} 
+		where username=#{username}, </update> -->
+	<select id="selectAllUser" resultType="User">
+	    select * from user
+	</select>
+	<select id="findByUser" parameterType="User" resultType="User">
+		select *
+		from user where username=#{username} and password=#{password}
+	</select>
+
+	<select id="selectAllUserWithCom" resultType="com.ota.domain.UserWithCom">
+		select * FROM
+		user,business 
+		where user.businessid = business.id
+	</select>
+
+	<select id="selectUserByusername" resultType="com.ota.domain.User" parameterType="java.lang.String">
+	   select * FROM user where username=#{username} 
+	</select>
+	
+	<delete id="delete" parameterType="User">
+	   delete  from user where id=#{id}
+	</delete>
+	
+	<update id="update" parameterType="User">
+	    update user
+		<set>
+		    <if test="username != null">
+				username = #{username,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				password = #{password,jdbcType=VARCHAR},
+			</if>
+			<if test="role != null">
+				role = #{role,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

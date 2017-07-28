@@ -1,0 +1,204 @@
+<!DOCTYPE html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+    <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+    <META HTTP-EQUIV="Expires" CONTENT="0">
+    <title>Burn Mac SN</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/base.css" rel="stylesheet">
+    <link href="css/layer.css" rel="stylesheet">
+    <link href="css/device.css" rel="stylesheet">
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <link href="css/bootstrap-table.css" rel="stylesheet">
+    <link href="css/bootstrap-select.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div id="header"></div>
+    <div class="row" id="content">
+        <div class="col-md-2">
+            <nav id="sidebar" class="">
+                <!--Loading sidebar-->
+            </nav>
+        </div>
+        <div class="col-md-10">
+            <!--筛选器-->
+            <div style="padding:0% 0% 0% 1%">
+
+
+                <select id="selectStatus" class="selectpicker">
+                    <option>All Status</option>
+                    <option>Success</option>
+                    <option>Failed</option>
+                    <option>Waiting</option>
+                </select>
+                <button class="btn btn-default" id="confirm_go">GO</button>
+
+            </div>
+            <br/>
+            <div class="container-fluid">
+                <div id="toolbar">
+                    <button id="add" type="button" class="btn btn-success" data-toggle="modal"
+                            data-target="#addModal"><span
+                            class="glyphicon glyphicon-plus"></span>Add
+                    </button>
+                    <button id="edit" type="button" class="btn btn-info" data-toggle="modal"
+                            data-target="#editModal"><span
+                            class="glyphicon glyphicon glyphicon-edit"></span>Edit
+                    </button>
+                    <button id="delete" type="button" class="btn btn-danger"><span
+                            class="glyphicon glyphicon glyphicon-trash"></span>Delete
+                    </button>
+                </div>
+                <table id="table_burnmacsn">
+                    <thead>
+                    <tr>
+                        <th data-checkbox="true"></th>
+                        <th data-field="mac">Mac</th>
+                        <th data-field="userid">SN</th>
+                        <th data-field="newmac">New Mac</th>
+                        <th data-field="newsn">New SN</th>
+                        <th data-field="status" data-formatter="statusReform">Status</th>
+                        <th data-field="createtime">Create At</th>
+                        <th data-field="updatetime">Update At</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div id="footer">
+    Copyright © 2008-2016 All Rights Reserved.
+</div>
+
+<!-- addDeviceModal -->
+<div class="modal addModal" id="addModal" tabindex="-1" role="dialog" aria-labelledby="add">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close closeBtn" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Add Burn Mac and SN</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="MAC" class="col-sm-2 control-label">MAC:</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="add_mac" placeholder="00:00:00:00:00:00"
+                                   maxlength="17">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="sn" class="col-sm-2 control-label">SN:</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="add_sn" placeholder="SN">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="newmac" class="col-sm-2 control-label">New Mac:</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="add_newmac" placeholder="00:00:00:00:00:00">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="newsn" class="col-sm-2 control-label">New SN:</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="add_newsn" placeholder="New SN">
+                        </div>
+                    </div>
+                    
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="submitAdd">Submit</button>
+                <button type="button" class="btn btn-default closeBtn" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End addDeviceSModal -->
+
+<!-- editDeviceModal -->
+<div class="modal" id="editModal" tabindex="-1" role="dialog" aria-labelledby="edit">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close closeBtn" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Edit Burn Mac And SN</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="MAC" class="col-sm-2 control-label">MAC:</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="edit_mac" placeholder="00:00:00:00:00:00"
+                                   maxlength="17">
+                            <input type="text" class="form-control" id="edit_id" style="display:none" maxlength="17">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="sn" class="col-sm-2 control-label">SN:</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="edit_sn" placeholder="SN">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="newmac" class="col-sm-2 control-label">New Mac:</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="edit_newmac" placeholder="00:00:00:00:00:00">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="newsn" class="col-sm-2 control-label">New SN:</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="edit_newsn" placeholder="New SN">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="eidt_status" class="col-sm-4 control-label">Status: </label>
+                        <div class="col-sm-5">
+                            <select id="edit_status" class="selectpicker">
+ 	   							<option>Success</option>
+    							<option>Failed</option>
+    							<option>Waiting</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="submitEdit">Submit</button>
+                <button type="button" class="btn btn-default closeBtn" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End editMacSNSModal -->
+
+
+<script src="js/jquery-1.11.1.min.js" type="text/javascript"></script>
+<script src="js/bootstrap.min.js" type="text/javascript"></script>
+<script src="js/common.js" type="text/javascript"></script>
+<script src="js/layer.js" type="text/javascript"></script>
+<script src="js/burnmacsn.js" type="text/javascript"></script>
+<script src="js/bootstrap-table.js" type="text/javascript"></script>
+<script src="js/bootstrap-select.js" type="text/javascript"></script>
+<script src="js/bootstrap-table-export.js" type="text/javascript"></script>
+<script src="js/jquery.base64.js" type="text/javascript"></script>
+<script src="js/layer.js" type="text/javascript"></script>
+</body>
+</html>
+

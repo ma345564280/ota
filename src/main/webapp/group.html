@@ -1,0 +1,163 @@
+<!DOCTYPE html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Group Management</title>
+
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/base.css" rel="stylesheet">
+  <link href="css/layer.css" rel="stylesheet">
+  <link href="css/font-awesome.css" rel="stylesheet">
+  <link href="css/bootstrap-table.css" rel="stylesheet">
+  <link href="css/bootstrap-select.css" rel="stylesheet">
+  <link href="css/usermanagerment.css" rel="stylesheet">
+</head>
+<body>
+	<div class="container">
+		<div id="header"></div>
+    <div class="row" id="content">
+      <div class="col-md-2">
+        <nav id="sidebar" class="">
+          <!--Loading sidebar-->
+        </nav>
+      </div>
+      <div class="col-md-10">
+     	<button id="add" class="btn btn-success" type="button" data-toggle="modal" data-target="#addGroupModal">
+        <span class="glyphicon glyphicon-plus"></span>Add</button>
+        <table id="group_table" class="table">
+        	<thead>
+	        	<tr>
+		        	<th style="display:none" data-field="name">Customer</th>
+		            <th data-field="groupname">Name</th>
+		            <th data-visible="false" data-field="sort">Sort</th>
+		            <th data-field="description">Description</th>
+		            <th data-formatter="groupOperationFun" data-events="operateEvents">Operation</th>
+	          	</tr>
+        	</thead>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div id="footer">
+    Copyright © 2008-2016 All Rights Reserved.
+  </div>
+  <!-- addAccountModal -->
+  <div class="modal accountModal" id="addGroupModal" tabindex="-1" role="dialog" aria-labelledby="addAccount">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close closeBtn" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Add group</h4>
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal">
+            <div class="form-group">
+              <label for="addGroup_selectCustomer" class="col-sm-2 control-label">Customer</label>
+              <div class="col-sm-10">
+                  <select id="addGroup_selectCustomer" class="selectpicker"></select>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="addGroup_groupname" class="col-sm-2 control-label">Group</label>
+              <div class="col-sm-10">
+                  	<input type="text" class="form-control" id="addGroup_groupname" placeholder="Group name">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="addGroup_groupname" class="col-sm-2 control-label">Sort: </label>
+              <div class="col-sm-10">
+              		<select id="addGroup_sort" class="from-control selectpicker">
+              		
+              		</select>
+                  	<!--<input type="text" class="form-control" id="addGroup_sort" placeholder="Sort">-->
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="addGroup_description" class="col-sm-2 control-label">Description: </label>
+              <div class="col-sm-10">
+                  	<input type="text" class="form-control" id="addGroup_description" placeholder="Description">
+              </div>
+            </div>
+            
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="submit_addGroup" onclick="submit_addGroupClick()">Submit</button>
+          <button type="button" class="btn btn-default closeBtn" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End addGroupModal -->
+  <!-- editGroupModal -->
+  <div class="modal" id="editGroupModal" tabindex="-1" role="dialog" aria-labelledby="editGroupTitle">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close closeBtn" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="editGroupTitle">Edit group</h4>
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal">
+          <div class="form-group">
+              <label for="editGroup" class="col-sm-2 control-label">Customer</label>
+              <div class="col-sm-10">
+                  <input type="text" class="form-control" id="editGroup_customer">
+                  <span class="red-star input-group-addon"></span>
+                  <input type="text" class="form-control" style="display:none" id="editGroup_id">
+              </div>
+            </div>
+          
+          
+            <div class="form-group">
+              <label for="editGroup" class="col-sm-2 control-label">Group</label>
+              <div class="col-sm-10">
+                  <input type="text" class="form-control" id="editGroup_groupname" placeholder="Group name">
+                  <span class="red-star input-group-addon"></span>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="editGroup_groupname" class="col-sm-2 control-label">Sort:</label>
+              <div class="col-sm-10">
+              		<select class="form-control selectpicker" id="editGroup_sort">
+              		</select>
+                  	<!--  <input type="text" class="form-control" id="editGroup_sort" placeholder="Sort">
+                  	<span class="red-star input-group-addon"></span>
+                  	-->
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="editGroup_description" class="col-sm-2 control-label">Description:</label>
+              <div class="col-sm-10">
+                  	<input type="text" class="form-control" id="editGroup_description" placeholder="Description">
+                  	<span class="red-star input-group-addon"></span>
+              </div>
+            </div>
+            
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="editGroup_Submit">Submit</button>
+          <button type="button" class="btn btn-default closeBtn" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End editGroupModal -->
+	<script src="js/jquery-1.11.1.min.js" type="text/javascript"></script>
+	<script src="js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="js/bootstrap-table.js" type="text/javascript"></script>
+	<script src="js/bootstrap-select.js" type="text/javascript"></script>
+	<script src="js/bootstrap-table-export.js" type="text/javascript"></script>
+  	<script src="js/common.js" type="text/javascript"></script>
+  	<script src="js/layer.js" type="text/javascript"></script>
+	<script src="js/group.js" type="text/javascript"></script>
+</body>
+</html>
+
