@@ -12,15 +12,15 @@
 	<!-- 1.数据源：DriverManagerDataSource -->
 	<bean id="datasource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		
+		<!--   数据源可以使用阿里巴巴的druid
 		<property name="url" value="jdbc:mysql://47.90.127.105:3306/otaserver" />
 		<property name="username" value="matao" />
 		<property name="password" value="Matao1021!" />
-		 <!--   数据源可以使用阿里巴巴的druid
+		 -->
 		<property name="url" value="jdbc:mysql://localhost:3306/ota" />
 		<property name="username" value="root" />
 		<property name="password" value="matao@2017" />
-		-->
+		
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 	</bean>
 
@@ -50,5 +50,42 @@
 
 	<!-- 5 使用声明式事务 transaction-manager:引用上面定义的事务管理器 -->
 	<tx:annotation-driven transaction-manager="txManager" />
+	
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~shiro配置~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- 自定义Realm -->
+	<bean id="myRealm" class="com.java1234.realm.MyRealm"/>  
+	
+	<!-- 安全管理器 -->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">  
+  	  <property name="realm" ref="myRealm"/>  
+	</bean>  
+	
+	<!-- Shiro过滤器 -->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">  
+	    <!-- Shiro的核心安全接口,这个属性是必须的 -->  
+	    <property name="securityManager" ref="securityManager"/>
+	    <!-- 身份认证失败，则跳转到登录页面的配置 -->  
+	    <property name="loginUrl" value="/index.jsp"/>
+	    <!-- 权限认证失败，则跳转到指定页面 -->  
+	    <property name="unauthorizedUrl" value="/unauthor.jsp"/>  
+	    <!-- Shiro连接约束配置,即过滤链的定义 -->  
+	    <property name="filterChainDefinitions">  
+	        <value>  
+	             /login=anon
+				/admin*=authc
+				/student=roles[teacher]
+				/teacher=perms["user:create"]
+	        </value>  
+	    </property>
+	</bean>  
+	
+	<!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->  
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>  
+	
+	<!-- 开启Shiro注解 -->
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"/>  
+  		<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">  
+  	  <property name="securityManager" ref="securityManager"/>  
+    </bean>  
 </beans>
  
